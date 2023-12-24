@@ -120,6 +120,46 @@ class App
         }
     }
 
+    public function register($query, $arr, $path)
+    {
+
+        if ($this->validate($arr) == "empty") {
+            echo "<script>alert('one or more inputs are empty')</script>";
+        } else {
+
+            $register_user = $this->link->prepare($query);
+            $register_user->execute($arr);
+
+            header("location: " . $path . "");
+        }
+    }
+
+    public function login($query, $data, $path)
+    {
+
+        //email
+
+        $login_user = $this->link->query($query);
+        $login_user->execute();
+
+        $fetch = $login_user->fetch(PDO::FETCH_ASSOC);
+
+        if ($login_user->rowCount() > 0) {
+
+            //password
+            if (password_verify($data['password'], $fetch['password'])) {
+                //start session vars
+
+                $_SESSION['email'] = $fetch['email'];
+                $_SESSION['username'] = $fetch['username'];
+                $_SESSION['user_id'] = $fetch['id'];
+
+                header("location: " . $path . "");
+            }
+        }
+
+    }
+
 }
 
 $obj = new App;
