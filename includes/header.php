@@ -1,3 +1,9 @@
+<?php
+
+define('APPURL', 'http://localhost/php-restaurant');
+?>
+
+
 <!-- Live Server is not possible without body or head tag -->
 
 <!DOCTYPE html>
@@ -23,15 +29,15 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
-    <link href="lib/animate/animate.min.css" rel="stylesheet">
-    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+    <link href="<?=APPURL;?>/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="<?=APPURL;?>/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="<?=APPURL;?>/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?=APPURL;?>/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Template Stylesheet -->
-    <link href="css/style.css" rel="stylesheet">
+    <link href="<?=APPURL;?>/css/style.css" rel="stylesheet">
 </head>
 
 <body>
