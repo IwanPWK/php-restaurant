@@ -24,9 +24,9 @@ class App
     {
         $this->link = new PDO("mysql:host=" . $this->host . ";dbname=" . $this->dbname . "", $this->user, $this->pass);
 
-        if ($this->link) {
-            echo "db connection is working";
-        }
+        // if ($this->link) {
+        //     echo "db connection is working";
+        // }
     }
 
     //select all
