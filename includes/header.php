@@ -1,5 +1,6 @@
 <?php
-
+$app = new App;
+$app->startingSession();
 define('APPURL', 'http://localhost/php-restaurant');
 ?>
 
@@ -66,13 +67,26 @@ define('APPURL', 'http://localhost/php-restaurant');
                         <a href="<?=APPURL;?>" class="nav-item nav-link active">Home</a>
                         <a href="<?=APPURL;?>/about.html" class="nav-item nav-link">About</a>
                         <a href="<?=APPURL;?>/service.html" class="nav-item nav-link">Service</a>
-                        <a href="<?=APPURL;?>/menu.html" class="nav-item nav-link">Menu</a>
-                        <a href="<?=APPURL;?>/cart.html" class="nav-item nav-link"><i class="fa-sharp fa-solid fa-cart-shopping"></i>Cart</a>
-
-
                         <a href="<?=APPURL;?>/contact.html" class="nav-item nav-link">Contact</a>
+                        <?php if (isset($_SESSION['username'])): ?>
+                        <a href="<?=APPURL;?>/booking.php" class="nav-item nav-link">Booking</a>
+
+                        <a href="<?=APPURL;?>/food/cart.php" class="nav-item nav-link"><i class="fa-sharp fa-solid fa-cart-shopping"></i>Cart</a>
+                        <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                   <?=$_SESSION['username'];?>
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" href="<?=APPURL;?>/users/bookings.php">Bookings</a></li>
+                                    <li><a class="dropdown-item" href="<?=APPURL;?>/users/orders.php">Orders</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" href="<?=APPURL;?>/auth/logout.php">Logout</a></li>
+                                </ul>
+                        </li>
+                        <?php else: ?>
                         <a href="<?=APPURL;?>/auth/login.php" class="nav-item nav-link">Login</a>
                         <a href="<?=APPURL;?>/auth/register.php" class="nav-item nav-link">Register</a>
+                        <?php endif;?>
                     </div>
 
                 </div>
