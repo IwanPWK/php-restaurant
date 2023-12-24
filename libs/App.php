@@ -1,6 +1,6 @@
 <?php
 
-require "../config/config.php";
+// require "../config/config.php";
 
 class App
 {
@@ -176,5 +176,3 @@ class App
     }
 
 }
-
-$obj = new App;
