@@ -159,6 +159,21 @@ class App
         }
 
     }
+    //starting session
+
+    public function startingSession()
+    {
+        session_start();
+    }
+
+    //validating sessions
+
+    public function validateSession()
+    {
+        if (isset($_SESSION['user_id'])) {
+            echo "<script>window.location.href='" . APPURL . "'</script>";
+        }
+    }
 
 }
 
