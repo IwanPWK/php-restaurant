@@ -15,6 +15,13 @@ $cart_items = $app->selectAll($query);
 
 $cart_price = $app->selectOne("SELECT SUM(price) AS all_price FROM cart WHERE user_id='$_SESSION[user_id]'");
 
+if (isset($_POST['submit'])) {
+
+    $_SESSION['total_price'] = $cart_price->all_price;
+
+    echo "<script>window.location.href='checkout.php'</script>";
+
+}
 ?>
 
             <div class="container-xxl py-5 bg-dark hero-header mb-5">
