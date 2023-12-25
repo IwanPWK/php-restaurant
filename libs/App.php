@@ -70,6 +70,14 @@ class App
 
     }
 
+    public function validateCart($q)
+    {
+        $row = $this->link->query($q);
+        $row->execute();
+        $count = $row->rowCount();
+        return $count;
+    }
+
     //insert query
 
     public function insert($query, $arr, $path)

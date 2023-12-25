@@ -15,9 +15,48 @@ $query = "SELECT * FROM foods WHERE meal_id=3";
 $app = new App;
 $meals_3 = $app->selectAll($query);
 
+function shortenDescription($description, $max_length)
+{
+
+    if (strlen($description) > $max_length) {
+        $short_description = substr($description, 0, $max_length);
+
+        if (substr($short_description, -1) !== ' ') {
+            $last_space_pos = strrpos($short_description, ' ');
+            $short_description = substr($short_description, 0, $last_space_pos);
+        }
+
+        return '<small class="fst-italic">' . $short_description . '...</small>';
+    } else {
+        return '<small class="fst-italic">' . $description . '</small>';
+    }
+}
+
 // $query = "SELECT * FROM reviews";
 // $app = new App;
 // $reviews = $app->selectAll($query);
+
+function generateMealHTML($meals)
+{
+    foreach ($meals as $meal) {
+        ?>
+
+<div class="col-lg-6">
+            <div class="d-flex align-items-center">
+                <img class="flex-shrink-0 img-fluid rounded" src="img/<?=$meal->image;?>" alt="" style="width: 80px;">
+                <div class="w-100 d-flex flex-column text-start ps-4">
+                    <h5 class="d-flex justify-content-between border-bottom pb-2">
+                        <span><?=$meal->name;?></span>
+                        <span class="text-primary">$<?=$meal->price;?></span>
+                    </h5>
+                    <?=shortenDescription($meal->description, 100);?>
+                    <a type="button" href="<?=APPURL;?>/food/add-cart.php?id=<?=$meal->id;?>" class="btn btn-primary py-2 top-0 end-0 mt-2 me-2">view</a>
+                </div>
+            </div>
+        </div>
+<?php
+}
+}
 ?>
 
 <div class="container-xxl py-5 bg-dark hero-header mb-5">
@@ -177,59 +216,17 @@ $meals_3 = $app->selectAll($query);
                     <div class="tab-content">
                         <div id="tab-1" class="tab-pane fade show p-0 active">
                             <div class="row g-4">
-                                <?php foreach ($meals_1 as $meal_1): ?>
-                                <div class="col-lg-6">
-                                    <div class="d-flex align-items-center">
-                                        <img class="flex-shrink-0 img-fluid rounded" src="img/<?=$meal_1->image;?>" alt="" style="width: 80px;">
-                                        <div class="w-100 d-flex flex-column text-start ps-4">
-                                            <h5 class="d-flex justify-content-between border-bottom pb-2">
-                                                <span><?=$meal_1->name;?></span>
-                                                <span class="text-primary">$<?=$meal_1->price;?></span>
-                                            </h5>
-                                            <small class="fst-italic"><?=$meal_1->description;?></small>
-                                            <a type="button" href="<?=APPURL;?>add-cart.php?id=<?=$meal_1->id;?>" class="btn btn-primary py-2 top-0 end-0 mt-2 me-2">view</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <?php endforeach;?>
+                                <?php generateMealHTML($meals_1);?>
                             </div>
                         </div>
                         <div id="tab-2" class="tab-pane fade show p-0">
                             <div class="row g-4">
-                            <?php foreach ($meals_2 as $meal_2): ?>
-                                <div class="col-lg-6">
-                                    <div class="d-flex align-items-center">
-                                        <img class="flex-shrink-0 img-fluid rounded" src="img/<?=$meal_2->image;?>" alt="" style="width: 80px;">
-                                        <div class="w-100 d-flex flex-column text-start ps-4">
-                                            <h5 class="d-flex justify-content-between border-bottom pb-2">
-                                                <span><?=$meal_2->name;?></span>
-                                                <span class="text-primary">$<?=$meal_2->price;?></span>
-                                            </h5>
-                                            <small class="fst-italic"><?=$meal_2->description;?></small>
-                                            <a type="button" href="<?=APPURL;?>add-cart.php?id=<?=$meal_2->id;?>" class="btn btn-primary py-2 top-0 end-0 mt-2 me-2">view</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <?php endforeach;?>
+                            <?php generateMealHTML($meals_2);?>
                             </div>
                         </div>
                         <div id="tab-3" class="tab-pane fade show p-0">
                             <div class="row g-4">
-                            <?php foreach ($meals_3 as $meal_3): ?>
-                                <div class="col-lg-6">
-                                    <div class="d-flex align-items-center">
-                                        <img class="flex-shrink-0 img-fluid rounded" src="img/<?=$meal_3->image;?>" alt="" style="width: 80px;">
-                                        <div class="w-100 d-flex flex-column text-start ps-4">
-                                            <h5 class="d-flex justify-content-between border-bottom pb-2">
-                                                <span><?=$meal_3->name;?></span>
-                                                <span class="text-primary">$<?=$meal_3->price;?></span>
-                                            </h5>
-                                            <small class="fst-italic"><?=$meal_3->description;?></small>
-                                            <a type="button" href="<?=APPURL;?>add-cart.php?id=<?=$meal_3->id;?>" class="btn btn-primary py-2 top-0 end-0 mt-2 me-2">view</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <?php endforeach;?>
+                            <?php generateMealHTML($meals_3);?>
                             </div>
                         </div>
                     </div>
