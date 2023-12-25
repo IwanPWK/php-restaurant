@@ -1,7 +1,8 @@
 <?php
 $app = new App;
 $app->startingSession();
-define('APPURL', 'http://localhost/php-restaurant');
+define("APPURL", "http://localhost/php-restaurant");
+define("APPIMAGES", "http://localhost/php-restaurant/img");
 ?>
 
 
