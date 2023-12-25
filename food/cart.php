@@ -15,13 +15,6 @@ $cart_items = $app->selectAll($query);
 
 $cart_price = $app->selectOne("SELECT SUM(price) AS all_price FROM cart WHERE user_id='$_SESSION[user_id]'");
 
-if (isset($_POST['submit'])) {
-
-    $_SESSION['total_price'] = $cart_price->all_price;
-
-    echo "<script>window.location.href='checkout.php'</script>";
-
-}
 ?>
 
             <div class="container-xxl py-5 bg-dark hero-header mb-5">
@@ -68,7 +61,8 @@ if (isset($_POST['submit'])) {
                         </tbody>
                       </table>
                       <div class="position-relative mx-auto" style="max-width: 500px; padding-left: 300px;">
-                        <p style="margin-left: 0px;" class="py-2 px-2 mb-0" type="text">&#45;&#45;&#62; Total: $<?php echo $cart_price->all_price; ?> &#60;&#45;&#45;</p>
+                        <p style="margin-left: 0px;" class="py-2 px-2 mb-0" type="text">&#45;&#45;&#62; Total: $<?=$cart_price->all_price == 0 ? '0' : $cart_price->all_price?>
+ &#60;&#45;&#45;</p>
                         <form method="POST" action="cart.php">
                             <button  name="submit" type="submit" class="btn btn-primary py-2 top-0 end-0 mt-2 me-2">Checkout</button>
                         </form>

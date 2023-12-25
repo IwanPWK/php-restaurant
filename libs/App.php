@@ -117,6 +117,12 @@ class App
         $delete_record = $this->link->query($query);
         $delete_record->execute();
 
+        if ($delete_record) {
+            $query_reset = "ALTER TABLE cart AUTO_INCREMENT = 1";
+            $reset_query = $this->link->query($query_reset);
+            $reset_query->execute();
+        }
+
         echo "<script>window.location.href='" . $path . "'</script>";
 
     }
